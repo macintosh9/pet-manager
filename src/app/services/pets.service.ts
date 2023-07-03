@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Status } from 'src/app/stats.enum';
 import { Observable } from 'rxjs';
 import { Pet } from '../interfaces/pets.interface';
@@ -25,10 +25,11 @@ export class PetsService {
 
   /**
    * Add a new pet to the application.
-   * @param newPet 
-   * @returns The new Pet and
+   * The post returns the full response.
+   * @param newPet Pet object.
+   * @returns The full http repsonse.
    */
-  public addNewPet(newPet: Pet): Observable<Pet> {
-    return this.http.post<Pet>('https://petstore3.swagger.io/api/v3/pet', newPet);
+  public addNewPet(newPet: Pet): Observable<HttpResponse<Pet>> {
+    return this.http.post<Pet>('https://petstore3.swagger.io/api/v3/pet', newPet,  { observe: 'response' });
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Pet } from 'src/app/interfaces/pets.interface';
 import { PetsService } from 'src/app/services/pets.service';
 import { Status } from 'src/app/stats.enum';
@@ -21,9 +22,16 @@ export class FormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private petsService: PetsService
+    private petsService: PetsService,
+    public dialogRef: MatDialogRef<FormComponent>
   ) {}
 
+  /**
+   * If the user clicks the add pet button in the form,
+   * first check if the form is valid.
+   * If the form is valid, then post the data to the backend.
+   * If the result is ok, then close the dialog.
+   */
   addPet(): void {
     if (this.petForm.valid) {
       const newPet: Pet = {
@@ -43,7 +51,10 @@ export class FormComponent {
         }]
       };
       this.petsService.addNewPet(newPet).subscribe(result => {
-        console.log('result', result);
+        // Do something with the result based on http status code.
+        if (result.status === 200) {
+          this.dialogRef.close();
+        }
       });
     }
   }
