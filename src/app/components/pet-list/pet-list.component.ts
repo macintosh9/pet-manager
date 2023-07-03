@@ -57,10 +57,18 @@ export class PetListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.animateReload();
       this.getPetData(this.statusValue).subscribe(data => {
         this.pets = data;
       });
     });
+  }
+
+  /**
+   * Set the pets array to empty array, so that a user can see an animation that the data is being reloaded.
+   */
+  public animateReload(): void {
+    this.pets = [];
   }
 
   private getPetData(status: Status): Observable<Pet[]> {

@@ -47,7 +47,7 @@ export class FormComponent {
         status: Status.AVAILABLE,
         tags: [ {
           id: 1,
-          name: 'iets'
+          name: 'tag1'
         }]
       };
       this.petsService.addNewPet(newPet).subscribe(result => {
