@@ -1,5 +1,17 @@
-<div class="pet-grid m-20">
-    <div *ngFor="let pet of pets" class="pet-grid-item">
-        <app-pet-card [petData]="pet"></app-pet-card>
+<div class="m-20 flex flex-col">
+    <div class="mb-4 w-full">
+        <mat-form-field>
+            <mat-label>Pet status</mat-label>
+            <mat-select (selectionChange)="onStatusChange($event)" [value]="initialValue">
+                <mat-option *ngFor="let status of statusCodes | keyvalue" [value]="status.value">
+                    {{status.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="pet-grid">
+        <div *ngFor="let pet of pets" class="pet-grid-item">
+            <app-pet-card [petData]="pet"></app-pet-card>
+        </div>
     </div>
 </div>
