@@ -1,0 +1,20 @@
+<mat-card [class.mat-elevation-z2]="true">
+    <mat-card-content>
+        <div class="flex flex-col">
+            <div>
+                Name: {{petData.name}}
+            </div>
+            <div>
+                Status: {{petData.status}}
+            </div>
+            <div>
+                <mat-list>
+                    <div mat-subheader>Photo Urls</div>
+                    <mat-list-item *ngFor="let url of petData.photoUrls">
+                      <div matListItemTitle>{{url}}</div>
+                    </mat-list-item>
+                  </mat-list>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

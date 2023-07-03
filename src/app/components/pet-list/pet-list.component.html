@@ -1,1 +1,5 @@
-<p>pet-list works!</p>
+<div class="pet-grid m-20">
+    <div *ngFor="let pet of pets" class="pet-grid-item">
+        <app-pet-card [petData]="pet"></app-pet-card>
+    </div>
+</div>
