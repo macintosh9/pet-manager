@@ -1,6 +1,6 @@
 export interface Pet {
     id: number;
-    category: PetCategory[];
+    category: PetCategory;
     name: string;
     photoUrls: string[];
     tags: Tag[];

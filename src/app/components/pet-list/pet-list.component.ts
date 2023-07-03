@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Observable } from 'rxjs';
 import { Pet } from 'src/app/interfaces/pets.interface';
 import { PetsService } from 'src/app/services/pets.service';
 import { Status } from 'src/app/stats.enum';
+import { FormComponent } from '../form/form.component';
 
 /**
  * Component that displays the list of pets based on the status.
@@ -20,8 +22,13 @@ export class PetListComponent implements OnInit {
   public statusCodes = Status;
   /** Sets the initial selected value in the select box to available. */
   public initialValue = Status.AVAILABLE;
+  /** Current selected status. */
+  private statusValue = Status.AVAILABLE;
 
-  constructor(private petsService: PetsService) {}
+  constructor(
+    private petsService: PetsService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getPetData(this.initialValue).subscribe(data => {
@@ -39,7 +46,26 @@ export class PetListComponent implements OnInit {
     });
   }
 
+  /**
+   * Open the add pet dialog.
+   * After the user closes the dialog, reload the current data.
+   */
+  public onAddPet(): void {
+    const dialogRef = this.dialog.open(FormComponent, {
+      height: '800px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getPetData(this.statusValue).subscribe(data => {
+        this.pets = data;
+      });
+    });
+  }
+
   private getPetData(status: Status): Observable<Pet[]> {
+    this.statusValue = status;
     return this.petsService.getPetsByStatus(status);
   }
+
 }

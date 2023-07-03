@@ -11,14 +11,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
-// import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormComponent } from './components/form/form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     PetListComponent,
-    PetCardComponent
+    PetCardComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatListModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
